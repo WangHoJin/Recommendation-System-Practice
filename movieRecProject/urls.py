@@ -18,6 +18,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
 urlpatterns = [
+    # movieRec 디렉토이의 urls.py로 접근하고 그 안에서 name이 index인 것을 찾는다.
     path('', include('movieRec.urls'), name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),

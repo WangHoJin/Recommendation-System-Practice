@@ -10,6 +10,7 @@ from .loadResult import load_result
 
 
 def index(request):
+    # movieRec/templates/movieRec/base.html을 가져다 화면에 보여준다.
     return render(request, 'movieRec/base.html', {})
 
 

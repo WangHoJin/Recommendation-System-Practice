@@ -1,0 +1,29 @@
+{% extends "movieRec/base.html" %}
+
+{% block subtitle %}
+Train Model | <a href="{% url 'recomm' %}">Recommend</a><br>
+{% endblock %}
+
+{% block body %}
+Choose the model:
+<br>
+
+<form action="{% url 'train_model' %}" method="post">
+{% csrf_token %}
+
+&emsp;<input type="radio" name="model" id="model0" value="KNN"><label>kNN</label>
+&ensp;k: <input type="text" name="param_k" value="5" size="1"><br>
+
+&emsp;<input type="radio" name="model" id="model1" value="MF"><label>MF</label><br>
+
+&emsp;<input type="radio" name="model" id="model2" value="MF_PLSI"><label>MF+PLSI</label>
+&ensp;#topics: <input type="text" name="param_nz" value="50" size="2"><br>
+<input type="submit" value="Start Train">
+</form>
+
+
+{% if train_finished %}
+Training {{ model }} finished<br>
+{% endif %}
+
+{% endblock %}

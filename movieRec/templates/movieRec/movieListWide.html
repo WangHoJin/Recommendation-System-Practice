@@ -1,0 +1,20 @@
+<table>
+    <tr>
+    <td>Rank</td>
+    {% for i in k_list %}
+    <td>{{ i }}</td>
+    {% endfor %}
+    </tr>
+    <tr>
+    <td>Title</td>
+    {% for movie in movie_list %}
+    <td>{{ movie.title }}</td>
+    {% endfor %}
+    <tr>
+    <tr>
+    <td>Description</td>
+    {% for movie in movie_list %}
+    <td>{{ movie.text }}</td>
+    {% endfor %}
+    <tr>
+</table>

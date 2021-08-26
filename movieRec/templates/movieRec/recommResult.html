@@ -1,0 +1,14 @@
+{% extends "movieRec/recomm.html" %}
+
+{% block body %}
+<h3>Result for "{{ target_user.name }}"</h3>
+
+<br>
+<h4>Watched Movie List</h4>
+{% include 'movieRec/viewedListWide.html' with viewed_page=viewed_page %}
+
+<br>
+<h4>Recommended Movie List</h4>
+{% include 'movieRec/recommListWide.html' with recomm_list=recomm_list %}
+
+{% endblock %}

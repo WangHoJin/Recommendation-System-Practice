@@ -1,0 +1,19 @@
+{% extends "movieRec/base.html" %}
+
+
+{% block subtitle %}
+<a href="{% url 'train' %}">Train Model</a> | Recommend<br>
+{% endblock %}
+
+{% block body %}
+<form action={% url 'recomm' %} method="post">
+{% csrf_token %}
+Choose the number of recommendations: 
+<input type="text" name="n_recomm" value="{{ n_recomm }}" size="2">
+<input type="submit" value="set">
+</form>
+<br>
+Choose a target user:
+<br><br>
+{% include 'movieRec/userList.html' %}
+{% endblock %}

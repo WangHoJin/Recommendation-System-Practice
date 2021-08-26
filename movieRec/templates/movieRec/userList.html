@@ -1,0 +1,13 @@
+<table>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+    </tr>
+
+    {% for user in user_list %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td><a href="{% url 'recomm_result' user.id %}">{{ user.name }}</a></td>
+    </tr>
+    {% endfor %}
+</table>

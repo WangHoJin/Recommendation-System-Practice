@@ -38,8 +38,13 @@ def load_recomm(cur, model_home):
     # 추천 알고리즘에서 생성한 추천 결과가 recommend_ratings.txt에 들어있다.
     # user_id::movie_id::score 형태로 저장되어 있는데 user_id, movie_id, score를 뽑아내서
     # movieRec_recomm 테이블에 삽입한다.
-
-    pass
+    path = 'matrixFactorization/recommend_ratings.txt'
+    cur.execute('DELETE FROM movieRec_recomm')
+    with open(path) as f:
+        for line in f:
+            token = line.strip().split('::')
+            cur.execute('INSERT INTO movieRec_recomm(user_id, movie_id, score) VALUES(?,?,?)', (token[0], token[1],token[2]))
+    # pass
 
 def load_result(model_home):
     conn= sqlite3.connect('./db.sqlite3')

@@ -11,13 +11,31 @@ def load(path):
 
 def recommend(R_train, R_predicted, item_ids, output_path):
     # write train ratings
+    with open(output_path + '/train_ratings.txt', 'w') as f:
+        rows, cols = R_train.nonzero()
+        for row, col in zip(rows, cols):
+            f.write('%d::%s::%.1f\n' % (row, item_ids[col], R_train[row, col]))
+            # remove train data from recommendation
+            R_predicted[row, col] = 0
     # write recommend ratings
-    pass
+    with open(output_path + '/recommend_ratings.txt', 'w') as f:
+        for i in range(R_predicted.shape[0]):
+            for j in range(R_predicted.shape[1]):
+                if R_predicted[i, j] > 1:
+                    f.write('%d::%s::%.3f\n' % (i, item_ids[j], R_predicted[i, j]))
+    # pass
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
+    # -i 데이터 파일이 있는 디렉토리 이름
+    # -o 결과 저장 디렉토리
+    # -a 번호 (학습 알고리즘 선택 번호)
+    #   번호가 0이면 run_kNN 함수를 호출하고
+    #   번호가 1이면 run_MF 함수를 호출하고
+    #   번호가 2이면 run_MF_PLSI 함수를 호출
+    # -k kNN 알고리즘에서 추천헤 사용하는 이웃의 개수 (default값은 5)
     parser.add_argument("-a", "--algorithm", type=int, help="algorithm 0 (knn), 1 (mf), 2 (plsi+mf)")
     parser.add_argument("-i", "--input_path", type=str, help="Path input data pickle")
     parser.add_argument("-o", "--output_path", type=str, help="Output path")
